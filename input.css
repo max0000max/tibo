@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-desk: 450px;
+}
+
+@layer base {
+  @font-face {
+    font-family: "TelingaterDisplay";
+    src: url("./assets/fonts/TelingaterDisplay.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Romul";
+    src: url("./assets/fonts/Romul.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body {
+    margin: 0px;
+    font-family: "Telingater Display";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul {
+    margin: 0px;
+    padding: 0px;
+    line-height: 1;
+  }
+
+  a {
+    text-transform: none;
+  }
+}
+
+@layer components {
+  .btn-shadow {
+    box-shadow: 0 0 2rem 0.25rem rgba(0, 0, 0, 0.5);
+  }
+
+  .section-1-shadow {
+    box-shadow: 0 1.5rem 2.625rem -1.1875rem #000 inset;
+  }
+
+  .section-2-shadow {
+    box-shadow: -0.75rem 0.0625rem 3.8125rem 1.6875rem rgba(0, 0, 0, 0.7);
+  }
+
+  .section-5-shadow {
+    box-shadow: 0 6.25rem 6.25rem -3.4375rem #000 inset;
+  }
+
+  .section-5-bg {
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.46) 45%),
+      url("./assets/img/tibo/tibo-5-block-bg.jpg");
+  }
+
+  @media screen and (max-width: 450px) {
+    .section-5-bg {
+      background-image: url("./assets/img/tibo/tibo-5-block-bg-ad.webp");
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    .section-5-shadow {
+      box-shadow: 0 0.6875rem 3.5rem 4.3125rem #000;
+    }
+  }
+
+  .section-3-bg-ad {
+    background-image:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.46) 0%, rgba(0, 0, 0, 0.72) 100%),
+      url("./assets/img/tibo/tibo-3-block-bg-ad.webp");
+  }
+
+  /*Стили карточек*/
+
+  .flip-container {
+    perspective: 62.5rem !important;
+    -webkit-perspective: 62.5rem !important;
+  }
+
+  .flipper {
+    position: relative;
+    transform-style: preserve-3d !important;
+    -webkit-transform-style: preserve-3d !important;
+    transition: transform 0.8s !important;
+    will-change: transform;
+    transform: translateZ(0); /* GPU ускорение */
+  }
+
+  .flip-container.flipped .flipper {
+    transform: rotateX(180deg) !important;
+  }
+
+  .front,
+  .back {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+  }
+
+  .front {
+    z-index: 2 !important; /* Front поверх */
+    transform: rotateX(0deg);
+  }
+
+  .back {
+    z-index: 1 !important; /* Back под front */
+    transform: rotateX(180deg); /* Изначально повёрнут */
+  }
+
+  /* Анимация карточек */
+  #tibo-toggle:checked + .card .card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-front,
+  .card-back {
+    position: absolute;
+    backface-visibility: hidden;
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+  }
+  .flip-container.flipped .flipper {
+    transform: rotateX(180deg);
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      transform: translateY(1.25rem);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .text-animate {
+    animation: fadeInUp 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) forwards;
+  }
+
+  /*Анимации круглишков в 3й секции*/
+  @keyframes dash-1 {
+    to {
+      stroke-dashoffset: 53.4;
+    }
+  }
+
+  @keyframes dash-2 {
+    to {
+      stroke-dashoffset: 160.2;
+    }
+  }
+
+  @keyframes dash-3 {
+    to {
+      stroke-dashoffset: 106.8;
+    }
+  }
+
+  .dash-1-animation {
+    animation: dash-1 2s linear forwards;
+  }
+
+  .dash-2-animation {
+    animation: dash-2 2s linear forwards;
+  }
+
+  .dash-3-animation {
+    animation: dash-3 2s linear forwards;
+  }
+
+  /* Классы слайдера */
+  .itc-slider {
+    position: relative;
+    width: 100vw;
+  }
+
+  .itc-slider-wrapper {
+    overflow: hidden;
+  }
+
+  .itc-slider-items {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+    --gap: 5rem;
+    gap: var(--gap);
+  }
+
+  .itc-slider-transition-none {
+    transition: none;
+  }
+
+  .itc-slider-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+    user-select: none;
+    will-change: transform;
+  }
+
+  .itc-slider-item > img {
+    width: 100%;
+  }
+
+  /* кнопки влево и вправо */
+  .itc-slider-btn {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0.6581rem;
+    height: 1.1719rem;
+    text-align: center;
+    background: transparent;
+    border: none;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .itc-slider-btn-hide {
+    display: none;
+  }
+
+  .itc-slider-btn-prev {
+    left: 1.0813rem;
+  }
+
+  .itc-slider-btn-next {
+    right: 1.0813rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    .itc-slider {
+      width: 26.938rem;
+    }
+    .slider-border {
+      border: #7f7d8e solid 0.125rem;
+    }
+    .itc-slider-btn {
+      top: 53%;
+    }
+    .itc-slider-btn-prev {
+      left: 1.288rem;
+    }
+
+    .itc-slider-btn-next {
+      right: 1.288rem;
+    }
+
+    .itc-slider-btn {
+      width: 0.6581rem;
+      height: 1.1719rem;
+    }
+  }
+}
+
+@layer utilities {
+}
