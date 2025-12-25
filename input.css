@@ -129,19 +129,6 @@
     transform: rotateY(180deg);
   }
 
-  .card-front,
-  .card-back {
-    position: absolute;
-    backface-visibility: hidden;
-  }
-
-  .card-back {
-    transform: rotateY(180deg);
-  }
-  .flip-container.flipped .flipper {
-    transform: rotateX(180deg);
-  }
-
   @keyframes fadeInUp {
     0% {
       transform: translateY(1.25rem);
